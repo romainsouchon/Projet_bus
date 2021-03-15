@@ -251,7 +251,7 @@ def fastest(liste_trajet, heure):
         if calcul_temps(heure, heure_arrive) <= convertion_horaire(temps):
             temps = convertion_temps_horaire(calcul_temps(heure, heure_arrive))
             res = trajet
-    return res
+    return res, temps
              
 #Renvoie le trajet qui arrive le plus tot à l'arrivee     
 def foremost(liste_trajet, heure):
@@ -272,7 +272,8 @@ def foremost(liste_trajet, heure):
         if harrive < temps:
             temps = harrive
             res = trajet
-    return res   
+    temps = convertion_temps_horaire(temps)
+    return res, temps   
 
 #Renvoie True si le format d'heure est correct
 def format_heure(temps):
@@ -386,13 +387,15 @@ if (mode == "shortest"):
         print(i.nom)
 
 elif (mode == "fastest"):
-    s3 = fastest(trajet, heure)
+    s3, t3 = fastest(trajet, heure)
     print("Trajet le plus rapide entre",debut,"et",arrive,"est:")
     for i in s3:
         print(i.nom)
+    print("Le trajet mettra", t3,"minutes")
 
 elif (mode == "foremost"):
-    s4 = foremost(trajet, heure)
+    s4, t4 = foremost(trajet, heure)
     print("Trajet arrivant le plus tot entre",debut,"et",arrive,"est:")
     for i in s4:
         print(i.nom)
+    print("Vous arriverez à", t4)
